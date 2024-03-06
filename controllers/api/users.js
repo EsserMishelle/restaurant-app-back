@@ -40,7 +40,16 @@ async function logIn(req, res) {
   }
 }
 
+async function index(req, res) {
+  try {
+    const Users = await User.find({}).exec();
+    // re-sort based upon the sortOrder of the categories
 
+    res.status(200).json(Users);
+  } catch (e) {
+    res.status(400).json({ msg: e.message });
+  }
+}
 module.exports = {
   create,
   logIn,
